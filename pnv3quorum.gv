@@ -1,0 +1,65 @@
+
+
+
+
+
+
+digraph graphname { 
+overlap = false;
+splines = true;
+
+K=0.25; ratio=0.75; overlap="9:prism"; 
+size="100,100"
+fontsize=1
+node[shape=record]
+
+
+subgraph G2 { 
+concentrate=true
+edge[constraint=false ,  
+
+
+concentrate=true
+
+];
+
+N1 [label="<t>Node1|{<p10>|<n11>|<n12>|<n13>} "];
+    N2 [label="<t>Node2|{<n20>|<n21>|<n22>Vnode 2 |<n23>}"]
+    N3 [label="<t>Node3|{<n30>|<n31>Vnode 1 |<n32>|<n33>}"]
+    N4 [label="<t>Node4|{<n40>Vnode 0|<n41>|<n42>|<n43>}"]
+    N5 [label="<t>Node5|{<n50>|<n51>|<n52>|<n53>}"]
+
+  N1 -> N2  [style=invis];
+  N2 -> N3  [style=invis];
+  N3 -> N4  [style=invis];
+  N4 -> N5  [style=invis];
+  N5 -> N1  [style=invis];
+
+N2 -> N1    [style=invis];
+N3 -> N2    [style=invis];
+N4 -> N3    [style=invis];
+N5 -> N4    [style=invis];
+N1 -> N5    [style=invis];
+};     
+               // N1 -> N2; 
+               // N2 -> N1; 
+               // N2 -> N3;
+               // N3 -> N2;
+               // N3 -> N4;
+               // N4 -> N3;
+               // N4 -> N5;
+               // N5 -> N5;
+               // N5 -> N1;
+               // N1 -> N5;
+
+
+                client -> N5:t  [label="request PUT w=1 (1)", fontcolor=darkgreen, constraint=true, length=90] ;
+                N5:t ->   N4:t   [label="forward put (2)", fontcolor=darkgreen ,constraint=false   ]  ;
+                N4:t ->    N4:n40   [label="store locally (3)", fontcolor=darkgreen ,constraint=false ]   ;
+                N4:t ->    N3:n31   [label="replicate (4)", fontcolor=darkgreen ,constraint=false ]     ;
+                N4:t ->    N5:t   [label="status (5)", fontcolor=darkgreen ,constraint=false ]   ;
+                N5:t -> client [label="response (6)", fontcolor=darkgreen, constraint=true];
+                N4:t ->    N2:n22   [label="replicate (7)", fontcolor=darkgreen ,constraint=false ]   ;
+                
+         }        
+

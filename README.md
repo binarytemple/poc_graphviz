@@ -1,2 +1,2 @@
-# poc_graphviz
-Playing around with Graphviz
+poc_graphviz
+============
